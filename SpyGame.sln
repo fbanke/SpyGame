@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyGame", "SpyGame.csproj", "{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyLib", "SpyLib\SpyLib.csproj", "{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyLibTest", "SpyLibTest\SpyLibTest.csproj", "{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}.Debug|x86.ActiveCfg = Debug|x86
+		{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}.Debug|x86.Build.0 = Debug|x86
+		{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}.Release|x86.ActiveCfg = Release|x86
+		{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}.Release|x86.Build.0 = Release|x86
+		{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}.Debug|x86.Build.0 = Debug|Any CPU
+		{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}.Release|x86.ActiveCfg = Release|Any CPU
+		{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}.Release|x86.Build.0 = Release|Any CPU
+		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Debug|x86.Build.0 = Debug|Any CPU
+		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Release|x86.ActiveCfg = Release|Any CPU
+		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
