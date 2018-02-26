@@ -7,8 +7,7 @@ namespace SpyGame
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            MyClass foo = new MyClass();
+            new BoardTester();
         }
     }
 }
