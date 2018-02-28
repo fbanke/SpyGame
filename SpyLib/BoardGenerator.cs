@@ -7,47 +7,40 @@ namespace SpyLib
 {
     public static class BoardGenerator
     {
-        public static IEnumerable<IEnumerable<int>> GenerateBoards(int n, List<int[]> validBoardsNMinus1)
+        public static IEnumerable<IEnumerable<int>> GenerateBoards(BoardValidator validator, int n)
         {
             var positions = Enumerable.Range(1, n);
 
-            if (validBoardsNMinus1.Count() == 0)
+            return QuickPerm(positions);
+        }
+
+        static IEnumerable<int[]> Perm(int[] arr, int k, BoardValidator validator)
+        {
+            if (k >= arr.Length)
             {
-                return QuickPerm(positions);
+                // permutation is complete
+                yield return arr;
             }
             else
             {
-                return QuickPermFromExisting(n, validBoardsNMinus1);
+                
+                Perm(arr, k + 1, validator);
+                for (int i = k + 1; i < arr.Length; i++)
+                {
+                    Swap(ref arr[k], ref arr[i]);
+                    Perm(arr, k + 1, validator);
+                    Swap(ref arr[k], ref arr[i]);
+                }
             }
         }
-
-        public static IEnumerable<IEnumerable<int>> QuickPermFromExisting(int n, List<int[]> validBoardsNMinus1)
+ 
+        private static void Swap<T>(ref T item1, ref T item2)
         {
-            foreach (var board in validBoardsNMinus1)
-            {
-                // find valid values
-                // only the new rows needs to be populated
-                var validValues = new List<int>();
-                for (int i = 1; i <= n; i++)
-                {
-                    validValues.Add(i);
-                }
-                
-                // generate all combinations for existing board
-                var newBoard = new List<int>();
-                for (int i = 0; i < n - 1; i++)
-                {
-                    newBoard.Add(board[i]);
-                }
-                foreach (var value in validValues)
-                {
-                    List<int> list = new List<int>(newBoard);
-                    list.Add(value);
-                    yield return list;
-                }
-
-            }            
+            T temp = item1;
+            item1 = item2;
+            item2 = temp;
         }
+
         
         public static IEnumerable<IEnumerable<T>> QuickPerm<T>(this IEnumerable<T> set)
         {

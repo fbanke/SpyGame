@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using SpyLib;
 using NUnit.Framework;
 
@@ -12,13 +14,11 @@ namespace SpyLibTest
         [Test]
         public void TestThat_GenerateNextBoards()
         {
-            List<int[]> boards = new List<int[]>();
-            boards.Add(new int[]{1,2,3});
+  
 
-            foreach (var board in BoardGenerator.QuickPermFromExisting(4, boards))
-            {
-                
-            }
+
         }
+
+        
     }
 }
