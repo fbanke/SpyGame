@@ -1,56 +1,34 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using System.Data.Linq;
 
 namespace SpyLib
 {
-    public static class BoardGenerator
+    /// <summary>
+    /// Implements a board generator that creates all possible permutations of lenght n
+    /// It is implemented using a generator to prevent large memory consumption on large n
+    /// 
+    /// Uses the QuickPerm algorithm explained here http://www.quickperm.org/
+    /// 
+    /// Implementation is copied from here https://stackoverflow.com/questions/11208446/generating-permutations-of-a-set-most-efficiently
+    /// </summary>
+    public class AllBoardGenerator : IBoardGenerator
     {
-        public static IEnumerable<IEnumerable<int>> GenerateBoards(BoardValidator validator, int n)
+        public IEnumerable<IEnumerable<int>> Generate(IBoardValidator validator, int n)
         {
             var positions = Enumerable.Range(1, n);
 
             return QuickPerm(positions);
         }
 
-        static IEnumerable<int[]> Perm(int[] arr, int k, BoardValidator validator)
+        private IEnumerable<IEnumerable<T>> QuickPerm<T>(IEnumerable<T> set)
         {
-            if (k >= arr.Length)
-            {
-                // permutation is complete
-                yield return arr;
-            }
-            else
-            {
-                
-                Perm(arr, k + 1, validator);
-                for (int i = k + 1; i < arr.Length; i++)
-                {
-                    Swap(ref arr[k], ref arr[i]);
-                    Perm(arr, k + 1, validator);
-                    Swap(ref arr[k], ref arr[i]);
-                }
-            }
-        }
- 
-        private static void Swap<T>(ref T item1, ref T item2)
-        {
-            T temp = item1;
-            item1 = item2;
-            item2 = temp;
-        }
-
-        
-        public static IEnumerable<IEnumerable<T>> QuickPerm<T>(this IEnumerable<T> set)
-        {
-            int N = set.Count();
-            int[] a = new int[N];
-            int[] p = new int[N];
+            var N = set.Count();
+            var a = new int[N];
+            var p = new int[N];
 
             var yieldRet = new T[N];
 
-            List<T> list = new List<T>(set);
+            var list = new List<T>(set);
 
             int i, j, tmp; // Upper Index i; Lower Index j
 
@@ -74,7 +52,7 @@ namespace SpyLib
 
                     //MAIN!
 
-                    for (int x = 0; x < N; x++)
+                    for (var x = 0; x < N; x++)
                     {
                         yieldRet[x] = list[a[x] - 1];
                     }

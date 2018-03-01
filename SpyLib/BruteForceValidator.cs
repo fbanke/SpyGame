@@ -5,34 +5,27 @@ using System.Diagnostics;
 
 namespace SpyLib
 {
-    public class BoardValidator
+    /// <summary>
+    /// Implements a board validator that can validate if a board is valid
+    /// 
+    /// It tests for the rules that no 2 spies must be on the same diagonal line
+    /// and that any 3 spies must not be on any straight line
+    /// 
+    /// </summary>
+    public class BruteForceValidator : IBoardValidator
     {
-        public Stopwatch swDiagonal;
-        public Stopwatch swOnLine;
-        
-        public BoardValidator()
-        {
-            swDiagonal = new Stopwatch();
-            swOnLine = new Stopwatch();
-        }
 
         public bool IsValid(int[] board, int n)
         {
-            swDiagonal.Start();
             if (IsInDiagonal(board, n))
             {
-                swDiagonal.Stop();
                 return false;
             }
-            swDiagonal.Stop();
 
-            swOnLine.Start();
             if (IsOnLine(board, n))
             {
-                swOnLine.Stop();
                 return false;
             }
-            swOnLine.Stop();
             
             return true;
         }
@@ -40,7 +33,6 @@ namespace SpyLib
         public bool IsInDiagonal(int[] board, int n)
         {
             // test all (x,y) coordinates
-            
             for (var x = n; x >= 1; x--)
             {
                 var y = board[x-1];

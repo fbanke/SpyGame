@@ -33,7 +33,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllBoardGeneratorTest.cs" />
     <Compile Include="BoardGeneratorTest.cs" />
+    <Compile Include="BruteForceValidatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BoardValidatorTest.cs" />
   </ItemGroup>

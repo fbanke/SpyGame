@@ -7,7 +7,8 @@ namespace SpyGame
     {
         public static void Main(string[] args)
         {
-            new BoardTester();
+            var tester = new BoardTester(11, 21);
+            tester.Run();
         }
     }
 }
