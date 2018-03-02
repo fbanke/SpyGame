@@ -1,5 +1,4 @@
-﻿using System;
-using SpyLib;
+﻿using SpyLib;
 
 namespace SpyGame
 {
@@ -7,7 +6,7 @@ namespace SpyGame
     {
         public static void Main(string[] args)
         {
-            var tester = new BoardTester(11, 21);
+            var tester = new BoardTester(11, 30);
             tester.Run();
         }
     }

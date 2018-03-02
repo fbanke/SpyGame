@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using SpyLib;
 using NUnit.Framework;
 
@@ -48,6 +49,10 @@ namespace SpyLibTest
 
     public class MockValidator : IBoardValidator
     {
+        public Stopwatch GetStopwatch()
+        {
+            return new Stopwatch();
+        }
         public bool IsValid(int[] board, int n)
         {
             return true;

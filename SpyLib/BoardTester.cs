@@ -20,8 +20,10 @@ namespace SpyLib
 
         public void Run()
         {
-            var generator = new AllBoardGenerator();
-            var validator = new BruteForceValidator();
+            var generator = new SmartBoardGenerator();
+            var validator = new SmartValidator();
+            //var generator = new AllBoardGenerator();
+            //var validator = new BruteForceValidator();
             
             for (var n = _start; n < _end; n += 2)
             {
@@ -40,6 +42,7 @@ namespace SpyLib
                 
                 sw.Stop();
                 Console.WriteLine("Elapsed={0}", sw.Elapsed);
+                Console.WriteLine("Validation time={0}", validator.GetStopwatch().Elapsed);
                 Console.WriteLine("");
             }
         }

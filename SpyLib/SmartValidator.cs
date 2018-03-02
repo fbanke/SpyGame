@@ -7,18 +7,31 @@ namespace SpyLib
 {
     public class SmartValidator : IBoardValidator
     {
+        public SmartValidator()
+        {
+            sw = new Stopwatch();
+        }
+        public Stopwatch GetStopwatch()
+        {
+            return sw;
+        }
+        private Stopwatch sw;
+        
         public bool IsValid(int[] board, int n)
         {
+            sw.Start();
             if (IsInDiagonal(board, n))
             {
+                sw.Stop();
                 return false;
             }
 
             if (IsOnLine(board, n))
             {
+                sw.Stop();
                 return false;
             }
-            
+            sw.Stop();
             return true;
         }
 
