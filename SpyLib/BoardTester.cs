@@ -20,15 +20,23 @@ namespace SpyLib
 
         public void Run()
         {
-            var generator = new SmartBoardGenerator();
-            var validator = new SmartValidator();
-            //var generator = new AllBoardGenerator();
-            //var validator = new BruteForceValidator();
-            
             for (var n = _start; n < _end; n += 2)
             {
-                var sw = new Stopwatch();
+                //var generator = new AllBoardGenerator();
+                //var validator = new BruteForceValidator();
+            
+                //var generator = new SmartBoardGenerator();
+                var validator = new SmartValidator();
+            
+                var generator = new RandomSmartBoardGenerator();
+                //var validator = new CachingValidator();
                 
+                var sw = new Stopwatch();
+
+//                var foo = new[] {16, 3, 11, 15, 18, 9, 14};
+//                Console.WriteLine(new SmartValidator().IsOnLine(foo, foo.Length));
+//                break;
+
                 Console.WriteLine("Finding valid {0} boards", n);
                 sw.Start();
                 foreach (var board in generator.Generate(validator, n))
@@ -41,9 +49,10 @@ namespace SpyLib
                 }
                 
                 sw.Stop();
-                Console.WriteLine("Elapsed={0}", sw.Elapsed);
                 Console.WriteLine("Validation time={0}", validator.GetStopwatch().Elapsed);
-                Console.WriteLine("");
+                Console.WriteLine("Elapsed={0}", sw.Elapsed);
+//                Console.WriteLine("Cache hits={0}", validator.cacheHit);
+//                Console.WriteLine("Cache miss={0}", validator.cacheMiss);
             }
         }
 

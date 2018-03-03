@@ -5,7 +5,7 @@ namespace SpyLib
 {
     public class SmartBoardGenerator : IBoardGenerator
     {
-        private IBoardValidator _validator;
+        protected IBoardValidator _validator;
         
         public IEnumerable<IEnumerable<int>> Generate(IBoardValidator validator, int n)
         {
@@ -19,7 +19,7 @@ namespace SpyLib
             yield return currentPermutation;
         }
 
-        private bool Perms(ref int[] currentPermutation, List<int> elementsAvailable, int k)
+        protected bool Perms(ref int[] currentPermutation, List<int> elementsAvailable, int k)
         {
             var elementsToNext = new List<int>(elementsAvailable);
             

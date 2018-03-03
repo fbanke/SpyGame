@@ -47,11 +47,11 @@ namespace SpyLib
         public bool IsInDiagonal(int[] board, int n)
         {
             // test all (x,y) coordinates
-            for (var x = n; x >= 1; x--)
+            for (var x = 1; x <= n; x++)
             {
                 var y = board[x-1];
                 // (x, y) - coordinate is (i, pos)
-                for (var x2 = x-1; x2 >= 1; x2--)
+                for (var x2 = x; x2 <= n; x2++)
                 {
                     var y2 = board[x2-1];
                     // solve equation for line between the two points
@@ -71,18 +71,18 @@ namespace SpyLib
         {
             // test all (x,y) coordinates
 
-            for (var x = n; x >= 1; x--)
+            for (var x = 1; x <= n; x++)
             {
                 var y = board[x - 1];
                 // (x, y) - coordinate is (i, pos)
-                for (var x2 = x-1; x2 >= 1; x2--)
+                for (var x2 = x+1; x2 <= n; x2++)
                 {
                     var y2 = board[x2 - 1];
                     // solve equation for line between the two points
                     double a = (double) (y - y2) / (x - x2);
                     double b = y - a * x;
 
-                    for (var x3 = x2-1; x3 >= 1; x3--)
+                    for (var x3 = x2+1; x3 <= n; x3++)
                     {
                         var y3 = board[x3 - 1];
                         // check if the third point are on the line 
