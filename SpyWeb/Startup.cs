@@ -54,22 +54,15 @@ namespace SpyWeb
             {
                 connection = CloudConfigurationManager.GetSetting("AzureStorageConnectionString");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 connection = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;";
             }
             var storageAccount = CloudStorageAccount.Parse(connection);
             var queueClient = storageAccount.CreateCloudQueueClient();
 
-            try
-            {
-                SpyQueue = queueClient.GetQueueReference("spy-queue");
-                SpyQueue.CreateIfNotExistsAsync().GetAwaiter().GetResult();
-            }
-            catch (Exception)
-            {
-                
-            }
+            SpyQueue = queueClient.GetQueueReference("spy-queue");
+            SpyQueue.CreateIfNotExistsAsync().GetAwaiter().GetResult();
 
         }
     }
