@@ -1,7 +1,7 @@
-@page
-@model QueueModel
-@{
-    ViewData["Title"] = "Queue create";
+﻿@{
+    ViewBag.Title = "Create Queue";
 }
 
-CREATE QUEUE
+<h2>Create Queue results</h2>
+
+Creation of @ViewBag.QueueName @(ViewBag.Success == true ? "succeeded" : "failed")
