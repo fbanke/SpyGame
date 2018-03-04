@@ -10,6 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9377CAE3-0AAD-4317-82DC-92DE01B050BD}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		.deployment = .deployment
+		deploy.sh = deploy.sh
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyWeb", "SpyWeb\SpyWeb.csproj", "{38A75642-E85D-4673-BC42-69C6DD205110}"
