@@ -3,6 +3,8 @@ using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Queue;
+using System;
+using Microsoft.IdentityModel.Protocols;
 
 namespace SpyWeb.Controllers
 {
@@ -17,8 +19,8 @@ namespace SpyWeb.Controllers
         
         public ActionResult CreateQueue()
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                CloudConfigurationManager.GetSetting("csb4b84ae5bd88ex4df5xbeb_AzureStorageConnectionString"));
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse("DefaultEndpointsProtocol=https;AccountName=csb4b84ae5bd88ex4df5xbeb;AccountKey=ERExFyCG5iTB+B2N2DtpEi0tjiTLhwgGaXKr/4xkiyXm9cNPppf8Bc3H8fGGUWOpRoU/aTfCY9e/8Zjf3rJEKA==;EndpointSuffix=core.windows.net");
+                //CloudConfigurationManager.GetSetting("AzureStorageConnectionString"));
             
             CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
             
@@ -26,7 +28,7 @@ namespace SpyWeb.Controllers
             ViewBag.Success = queue.CreateIfNotExistsAsync();
             ViewBag.QueueName = queue.Name;
 
-            return View();
+            return View("CreateQueue");
         }
     }
 }
