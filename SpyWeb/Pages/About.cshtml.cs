@@ -12,7 +12,14 @@ namespace SpyWeb.Pages
 
         public void OnGet()
         {
-            Message = "Your application description page.";
+            
+            Message = "Your application description page."+GetEnvironmentVariable("WEBSITE_HTTPLOGGING_RETENTION_DAYS");
+        }
+        
+        public static string GetEnvironmentVariable(string name)
+        {
+            return name + ": " + 
+                   System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
         }
     }
 }
