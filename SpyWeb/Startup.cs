@@ -60,10 +60,17 @@ namespace SpyWeb
             }
             var storageAccount = CloudStorageAccount.Parse(connection);
             var queueClient = storageAccount.CreateCloudQueueClient();
-            
-            SpyQueue = queueClient.GetQueueReference("spy-queue");
-            SpyQueue.CreateIfNotExistsAsync().GetAwaiter().GetResult();
-            
+
+            try
+            {
+                SpyQueue = queueClient.GetQueueReference("spy-queue");
+                SpyQueue.CreateIfNotExistsAsync().GetAwaiter().GetResult();
+            }
+            catch (Exception)
+            {
+                
+            }
+
         }
     }
 }
