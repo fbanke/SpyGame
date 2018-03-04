@@ -21,5 +21,11 @@ namespace SpyWeb
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+        
+        public static string GetEnvironmentVariable(string name)
+        {
+            return name + ": " + 
+                   System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
+        }
     }
 }
