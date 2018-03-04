@@ -1,10 +1,7 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace SpyWeb
 {
@@ -17,27 +14,28 @@ namespace SpyWeb
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        #region snippet_ConfigureServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
         }
+        #endregion
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-//            if (env.IsDevelopment())
-//            {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
-//            }
-//            else
-//            {
-//                app.UseExceptionHandler("/Error");
-//            }
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

@@ -12,19 +12,19 @@ namespace SpyWeb.Controllers
             return View();
         }
         
-        public ActionResult CreateQueue()
-        {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-                Program.GetEnvironmentVariable("STORAGE_CONNECTION"));
-            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
-            
-            CloudQueue queue = queueClient.GetQueueReference("spy-queue");
-
-            ViewBag.Success = queue.CreateIfNotExistsAsync();
-
-            ViewBag.QueueName = queue.Name;
-            
-            return View();
-        }
+//        public ActionResult CreateQueue()
+//        {
+//            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+//                Program.GetEnvironmentVariable("STORAGE_CONNECTION"));
+//            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+//            
+//            CloudQueue queue = queueClient.GetQueueReference("spy-queue");
+//
+//            ViewBag.Success = queue.CreateIfNotExistsAsync();
+//
+//            ViewBag.QueueName = queue.Name;
+//            
+//            return View();
+//        }
     }
 }
