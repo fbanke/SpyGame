@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace SpyWeb
 {
@@ -14,6 +13,17 @@ namespace SpyWeb
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+                GetEnvironmentVariable("STORAGE_CONNECTION"));
+            
+            CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+
+            // Retrieve a reference to a container.
+            CloudQueue queue = queueClient.GetQueueReference("spyQueue");
+
+            // Create the queue if it doesn't already exist
+            queue.CreateIfNotExistsAsync();
         }
 
         public IConfiguration Configuration { get; }
@@ -39,6 +49,12 @@ namespace SpyWeb
             app.UseStaticFiles();
 
             app.UseMvc();
+        }
+        
+        public static string GetEnvironmentVariable(string name)
+        {
+            return name + ": " + 
+                   System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
         }
     }
 }
