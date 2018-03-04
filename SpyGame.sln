@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyGame", "SpyGame.csproj", "{F0EB45F5-3DEC-4B76-9884-26FACD5F0A22}"
@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyWeb", "SpyWeb\SpyWeb.csproj", "{38A75642-E85D-4673-BC42-69C6DD205110}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Debug|x86.Build.0 = Debug|Any CPU
 		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{48E7AF2D-1F11-4A36-9493-1B4C0A2234A2}.Release|x86.Build.0 = Release|Any CPU
+		{38A75642-E85D-4673-BC42-69C6DD205110}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{38A75642-E85D-4673-BC42-69C6DD205110}.Debug|x86.Build.0 = Debug|Any CPU
+		{38A75642-E85D-4673-BC42-69C6DD205110}.Release|x86.ActiveCfg = Release|Any CPU
+		{38A75642-E85D-4673-BC42-69C6DD205110}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
