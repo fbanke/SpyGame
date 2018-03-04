@@ -1,0 +1,36 @@
+﻿@page
+@model Pages.AddRequestModel
+
+<h2>Queue new board</h2>
+
+<form method="POST">
+<table>
+    <tbody>
+    <tr>
+        <td>n</td>
+        <td><input name="n" /></td>
+    </tr>
+    <tr>
+        <td>Validator</td>
+        <td>
+            <select name="validator">
+                <option>Bruteforce</option>
+                <option>Smart</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Generator</td>
+        <td>
+            <select name="Generator">
+                <option>Bruteforce</option>
+                <option>Smart</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"><input type="submit" /></td>
+    </tr>
+    </tbody>
+</table>    
+</form>

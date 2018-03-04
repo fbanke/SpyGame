@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Azure;
@@ -41,12 +42,12 @@ namespace SpyWeb
 
             app.UseMvcWithDefaultRoute();
 
-            Setup();
+            SetupCloudQueue();
         }
 
         public static CloudQueue SpyQueue { get; private set; }
 
-        public void Setup()
+        public void SetupCloudQueue()
         {
             string connection = "";
             try
@@ -55,13 +56,14 @@ namespace SpyWeb
             }
             catch (Exception e)
             {
-                connection = "UseDevelopmentStorage=true";
+                connection = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://127.0.0.1:10001/devstoreaccount1;";
             }
             var storageAccount = CloudStorageAccount.Parse(connection);
             var queueClient = storageAccount.CreateCloudQueueClient();
             
             SpyQueue = queueClient.GetQueueReference("spy-queue");
-            SpyQueue.CreateIfNotExistsAsync();
+            SpyQueue.CreateIfNotExistsAsync().GetAwaiter().GetResult();
+            
         }
     }
 }
