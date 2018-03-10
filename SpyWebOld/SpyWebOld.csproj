@@ -3,6 +3,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="azurite\**" />
+    <Content Remove="azurite\**" />
+    <EmbeddedResource Remove="azurite\**" />
+    <None Remove="azurite\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Azurite" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0-preview1-final" />
@@ -11,8 +17,5 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="azurite" />
   </ItemGroup>
 </Project>
