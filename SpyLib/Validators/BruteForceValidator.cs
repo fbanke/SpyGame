@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace SpyLib
 {
@@ -14,46 +13,54 @@ namespace SpyLib
     /// </summary>
     public class BruteForceValidator : IBoardValidator
     {
+        private Stopwatch _validationTime;
+        private int _boardsValidated = 0;
+
         public BruteForceValidator()
         {
-            sw = new Stopwatch();
+            _validationTime = new Stopwatch();
         }
 
-        public Stopwatch GetStopwatch()
+        public string GetDebug()
         {
-            return sw;
+            var output = new StringBuilder();
+            output.AppendFormat("Validation time: {0}" + Environment.NewLine, _validationTime.Elapsed);
+            output.AppendFormat("Boards validated: {0}" + Environment.NewLine, _boardsValidated);
+
+            return output.ToString();
         }
-        private Stopwatch sw;
-        
-        public bool IsValid(int[] board, int n)
+
+        public bool IsValid(Board board)
         {
-            sw.Start();
-            if (IsInDiagonal(board, n))
+            _boardsValidated++;
+            _validationTime.Start();
+
+            if (IsInDiagonal(board))
             {
-                sw.Stop();
+                _validationTime.Stop();
                 return false;
             }
 
-            if (IsOnLine(board, n))
+            if (IsOnLine(board))
             {
-                sw.Stop();
+                _validationTime.Stop();
                 return false;
             }
-            
-            sw.Stop();
+
+            _validationTime.Stop();
             return true;
         }
 
-        public bool IsInDiagonal(int[] board, int n)
+        public bool IsInDiagonal(Board board)
         {
             // test all (x,y) coordinates
-            for (var x = 1; x <= n; x++)
+            for (var x = 1; x <= board.n; x++)
             {
-                var y = board[x-1];
+                var y = board.board[x-1];
                 // (x, y) - coordinate is (i, pos)
-                for (var x2 = x; x2 <= n; x2++)
+                for (var x2 = x; x2 <= board.n; x2++)
                 {
-                    var y2 = board[x2-1];
+                    var y2 = board.board[x2-1];
                     // solve equation for line between the two points
                     double slope = (double)(y - y2) / (x - x2);
                     // if slope is 1 they are on a diagonal
@@ -67,24 +74,24 @@ namespace SpyLib
             return false;
         }
 
-        public bool IsOnLine(int[] board, int n)
+        public bool IsOnLine(Board board)
         {
             // test all (x,y) coordinates
 
-            for (var x = 1; x <= n; x++)
+            for (var x = 1; x <= board.n; x++)
             {
-                var y = board[x - 1];
+                var y = board.board[x - 1];
                 // (x, y) - coordinate is (i, pos)
-                for (var x2 = x+1; x2 <= n; x2++)
+                for (var x2 = x+1; x2 <= board.n; x2++)
                 {
-                    var y2 = board[x2 - 1];
+                    var y2 = board.board[x2 - 1];
                     // solve equation for line between the two points
                     double a = (double) (y - y2) / (x - x2);
                     double b = y - a * x;
 
-                    for (var x3 = x2+1; x3 <= n; x3++)
+                    for (var x3 = x2+1; x3 <= board.n; x3++)
                     {
-                        var y3 = board[x3 - 1];
+                        var y3 = board.board[x3 - 1];
                         // check if the third point are on the line 
                         if (y3 == a * x3 + b)
                         {

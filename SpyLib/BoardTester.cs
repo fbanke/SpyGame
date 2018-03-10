@@ -1,70 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Data.Linq;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace SpyLib
 {
     public class BoardTester
     {
-        private readonly int _start;
-        private readonly int _end;
+        private int _start;
+        private int _end;
+        private IBoardGenerator _generator;
+        private IBoardValidator _validator;
         
-        public BoardTester(int start, int end)
+        public BoardTester(int start, int end, IBoardGenerator generator, IBoardValidator validator)
         {
             _start = start;
             _end = end;
+            _validator = validator;
+            _generator = generator;
         }
 
         public void Run()
         {
             for (var n = _start; n < _end; n += 2)
             {
-                //var generator = new AllBoardGenerator();
-                //var validator = new BruteForceValidator();
-            
-                //var generator = new SmartBoardGenerator();
-                var validator = new SmartValidator();
-            
-                var generator = new RandomSmartBoardGenerator();
-                //var validator = new CachingValidator();
-                
-                var sw = new Stopwatch();
-
-//                var foo = new[] {16, 3, 11, 15, 18, 9, 14};
-//                Console.WriteLine(new SmartValidator().IsOnLine(foo, foo.Length));
-//                break;
+                var genrationTime = new Stopwatch();
 
                 Console.WriteLine("Finding valid {0} boards", n);
-                sw.Start();
-                foreach (var board in generator.Generate(validator, n))
+                genrationTime.Start();
+                foreach (var board in _generator.Generate(_validator, n))
                 {
-                    if (validator.IsValid(board.ToArray(), n))
+                    if (_validator.IsValid(board))
                     {
-                        OutputBoard(board.ToArray(), n);
+                        Console.Write(board);
                         break;
                     }
                 }
-                
-                sw.Stop();
-                Console.WriteLine("Validation time={0}", validator.GetStopwatch().Elapsed);
-                Console.WriteLine("Elapsed={0}", sw.Elapsed);
-//                Console.WriteLine("Cache hits={0}", validator.cacheHit);
-//                Console.WriteLine("Cache miss={0}", validator.cacheMiss);
-            }
-        }
 
-        private void OutputBoard(int[] board, int n)
-        {
-            Console.WriteLine(n);
-            foreach (var pos in board)
-            {
-                Console.Write(pos+" ");
+                genrationTime.Stop();
+                Console.WriteLine("Elapsed time: {0}", genrationTime.Elapsed);
+                Console.Write(_validator.GetDebug());
             }
-
-            Console.WriteLine("");  
         }
     }
 }

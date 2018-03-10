@@ -1,49 +1,57 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace SpyLib
 {
     public class SmartValidator : IBoardValidator
     {
+        private Stopwatch _validationTime;
+        private int _boardsValidated = 0;
+
         public SmartValidator()
         {
-            sw = new Stopwatch();
+            _validationTime = new Stopwatch();
         }
-        public Stopwatch GetStopwatch()
+
+        public string GetDebug()
         {
-            return sw;
+            var output = new StringBuilder();
+            output.AppendFormat("Validation time: {0}" + Environment.NewLine, _validationTime.Elapsed);
+            output.AppendFormat("Boards validated: {0}" + Environment.NewLine, _boardsValidated);
+
+            return output.ToString();
         }
-        private Stopwatch sw;
-        
-        public bool IsValid(int[] board, int n)
+
+        public bool IsValid(Board board)
         {
-            sw.Start();
-            if (IsInDiagonal(board, n))
+            _boardsValidated++;
+            _validationTime.Start();
+
+            if (IsInDiagonal(board))
             {
-                sw.Stop();
+                _validationTime.Stop();
                 return false;
             }
 
-            if (IsOnLine(board, n))
+            if (IsOnLine(board))
             {
-                sw.Stop();
+                _validationTime.Stop();
                 return false;
             }
-            sw.Stop();
+            _validationTime.Stop();
             return true;
         }
 
-        public bool IsInDiagonal(int[] board, int n)
+        public virtual bool IsInDiagonal(Board board)
         {
             // test all (x,y) coordinates
-            var x = n;
-            var y = board[x-1]; // only look at the newest point
+            var x = board.n;
+            var y = board.board[x-1]; // only look at the newest point
             // (x, y) - coordinate is (i, pos)
-            for (var x2 = 1; x2 < n; x2++)
+            for (var x2 = 1; x2 < board.n; x2++)
             {
-                var y2 = board[x2-1];
+                var y2 = board.board[x2-1];
                 // solve equation for line between the two points
                 var slope = (double)(y - y2) / (x - x2);
                 // if slope is 1 they are on a diagonal
@@ -58,25 +66,22 @@ namespace SpyLib
 
         private const double TOLERANCE = 0.001;
         
-        public bool IsOnLine(int[] board, int n)
+        public virtual bool IsOnLine(Board board)
         {
-            var x = n;
-            var y = board[x - 1];
-            //Console.WriteLine(y);
+            var x = board.n;
+            var y = board.board[x - 1];
             // from first point to the second last point 
-            for (var x2 = 1; x2 < n; x2++)
+            for (var x2 = 1; x2 < board.n; x2++)
             {
-                var y2 = board[x2 - 1];
+                var y2 = board.board[x2 - 1];
                 //Console.WriteLine("A: "+y2);
                 // solve equation for line between the two points
                 var a = (double) (y - y2) / (x - x2);
                 var b = y - a * x;
                 // from the second point to the third last
-                for (var x3 = x2+1; x3 < n; x3++)
+                for (var x3 = x2+1; x3 < board.n; x3++)
                 {
-                    var y3 = board[x3 - 1];
-                    //Console.WriteLine("B: "+y3);
-                    //Console.WriteLine("C: "+(a * x3 + b));
+                    var y3 = board.board[x3 - 1];
                     // check if the third point are on the line 
                     if (Math.Abs(y3 - (a * x3 + b)) < TOLERANCE)
                     {

@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace SpyLibTest
 {
     [TestFixture]
-    public class BruteForceValidatorTest
+    public class SmartValidatorTest
     {
         static object[] DiagonalCases =
         {
@@ -14,21 +14,19 @@ namespace SpyLibTest
             // the last two elements are on a diagonal
             new object[] { new Board(new[] { 1, 3, 2 }, 3), true},
 
-            // x # # # #
-            // # # x # #
-            // # # # # x
-            // # x # # #
-            // # # # x #
-            // no elements in a diagonal
-            new object[] { new Board(new[] { 1, 3, 5, 2, 4 }, 5), false},
+            // # x #
+            // x # #
+            // # # x
+            // the first two elements are on a diagonal, this can't be detected by the validator
+            new object[] { new Board(new[] { 2, 1, 3 }, 3), false},
         };
 
         [Test]
         [TestCaseSource("DiagonalCases")]
         public void Test_Diagonals(Board board, bool returnValue)
         {
-            var validator = new BruteForceValidator();
-            
+            var validator = new SmartValidator();
+
             Assert.AreEqual(returnValue, validator.IsInDiagonal(board));
         }
 
@@ -39,31 +37,31 @@ namespace SpyLibTest
             // # # # # x
             // # x # # #
             // # # # x #
-            // the first 3 elements are on the same line
-            new object[] { new Board(new []{1, 3, 5, 2, 4}, 5), true },
+            // the first 3 elements are on the same line, this can't be detected by the validator
+            new object[] { new Board(new []{1, 3, 5, 2, 4}, 5), false },
 
+            // # x # # #
+            // # # # x #
             // x # # # #
             // # # x # #
-            // # # # x #
-            // # x # # #
             // # # # # x
-            // no elements on the same line
-            new object[] { new Board(new []{1, 3, 4, 2, 5}, 5), false }
+            // the last three elements are on the same line
+            new object[] { new Board(new []{2, 4, 1, 3, 5}, 5), true }
         };
 
         [Test]
         [TestCaseSource("OnLineCases")]
         public void Test_OnLine(Board board, bool returnValue)
         {
-            var validator = new BruteForceValidator();
-            
+            var validator = new SmartValidator();
+
             Assert.AreEqual(returnValue, validator.IsOnLine(board));
         }
 
         [Test]
         public void TestThat_DebugFormatCountsValidatedBoardsCorrect()
         {
-            var validator = new BruteForceValidator();
+            var validator = new SmartValidator();
             var board = new Board(new[] { 1, 2, 3 }, 3);
 
             validator.IsValid(board);

@@ -1,20 +1,59 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
+
 namespace SpyLib
 {
-    public class Board
+    public struct Board
     {
-        private int[] config;
-        private BoardValidator validator;
+        public int[] board;
+        public int n;
 
-        public Board(int[] config, BoardValidator validator)
+        public Board(int[] board, int n)
         {
-            this.config = config;
-            this.validator = validator;
+            this.board = board;
+            this.n = n;
         }
 
-        public bool IsValid()
+        public override bool Equals(Object obj)
         {
-            return validator.IsValid(config);
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            var b = (Board)obj;
+
+            bool isEqual = Enumerable.SequenceEqual(board, b.board);
+            
+            if (b.n == n && isEqual)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override string ToString()
+        {
+            var output = new StringBuilder();
+            output.AppendLine(n.ToString());
+
+            var last = board[board.Length - 1];
+            foreach (var pos in board)
+            {
+                output.AppendFormat(pos.ToString());
+                if(pos != last)
+                {
+                    output.Append(" ");
+                }
+            }
+
+            output.AppendLine("");
+            return output.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return board.GetHashCode() ^ n;
         }
     }
 }

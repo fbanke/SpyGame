@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using SpyLib;
 using NUnit.Framework;
 
@@ -8,54 +7,39 @@ namespace SpyLibTest
     [TestFixture]
     public class AllBoardGeneratorTest
     {
-
         [Test]
         public void TestThat_GeneratingAllBoardsFor3()
         {
             var generator = new AllBoardGenerator();
-            var boards = new List<int[]>{
-                new []{1,2,3},
-                new []{2,1,3},
-                new []{2,3,1},
-                new []{3,1,2},
-                new []{1,3,2},
-                new []{3,2,1}
+            var boards = new List<Board>{
+                new Board(new []{1,2,3}, 3),
+                new Board(new []{2,1,3}, 3),
+                new Board(new []{2,3,1}, 3),
+                new Board(new []{3,1,2}, 3),
+                new Board(new []{1,3,2}, 3),
+                new Board(new []{3,2,1}, 3)
             };
             
-            foreach (var board in generator.Generate(new MockValidator(), 3))
-            {
+            foreach (var board in generator.Generate(new MockValidatorAlwaysTrue(), 3))
+            { 
                 CollectionAssert.Contains(boards, board);  
             }
-
         }
         
         [Test]
         public void TestThat_GeneratingAllBoardsFor2()
         {
             var generator = new AllBoardGenerator();
-            var boards = new List<int[]>
+            var boards = new List<Board>
             {
-                new []{1,2},
-                new []{2,1}
+                new Board(new []{1,2}, 2),
+                new Board(new []{2,1}, 2)
             };
             
-            foreach (var board in generator.Generate(new MockValidator(), 2))
+            foreach (var board in generator.Generate(new MockValidatorAlwaysTrue(), 2))
             {
                 CollectionAssert.Contains(boards, board);  
             }
-
-        }
-    }
-
-    public class MockValidator : IBoardValidator
-    {
-        public Stopwatch GetStopwatch()
-        {
-            return new Stopwatch();
-        }
-        public bool IsValid(int[] board, int n)
-        {
-            return true;
         }
     }
 }

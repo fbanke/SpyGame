@@ -5,7 +5,7 @@ namespace SpyLib
 {
     /// <summary>
     /// Implements a board generator that creates all possible permutations of lenght n
-    /// It is implemented using a generator to prevent large memory consumption on large n
+    /// It is implemented as a generator to prevent large memory consumption on large n
     /// 
     /// Uses the QuickPerm algorithm explained here http://www.quickperm.org/
     /// 
@@ -13,22 +13,22 @@ namespace SpyLib
     /// </summary>
     public class AllBoardGenerator : IBoardGenerator
     {
-        public IEnumerable<IEnumerable<int>> Generate(IBoardValidator validator, int n)
+        public IEnumerable<Board> Generate(IBoardValidator validator, int n)
         {
             var positions = Enumerable.Range(1, n);
 
             return QuickPerm(positions);
         }
 
-        private IEnumerable<IEnumerable<T>> QuickPerm<T>(IEnumerable<T> set)
+        private IEnumerable<Board> QuickPerm(IEnumerable<int> set)
         {
             var N = set.Count();
             var a = new int[N];
             var p = new int[N];
 
-            var yieldRet = new T[N];
+            var yieldRet = new int[N];
 
-            var list = new List<T>(set);
+            var list = new List<int>(set);
 
             int i, j, tmp; // Upper Index i; Lower Index j
 
@@ -38,7 +38,7 @@ namespace SpyLib
                 a[i] = i + 1; // a[i] value is not revealed and can be arbitrary
                 p[i] = 0; // p[i] == i controls iteration and index boundaries for i
             }
-            yield return list;
+            yield return new Board(list.ToArray(), N);
             //display(a, 0, 0);   // remove comment to display array a[]
             i = 1; // setup first swap points to be 1 and 0 respectively (i & j)
             while (i < N)
@@ -56,7 +56,7 @@ namespace SpyLib
                     {
                         yieldRet[x] = list[a[x] - 1];
                     }
-                    yield return yieldRet;
+                    yield return new Board(yieldRet.ToArray(), N);
                     //display(a, j, i); // remove comment to display target array a[]
 
                     // MAIN!

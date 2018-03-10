@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Threading;
 
 namespace SpyLib
-{
+{/*
     public class RandomSmartBoardGenerator : SmartBoardGenerator
     {
-        public new IEnumerable<IEnumerable<int>> Generate(IBoardValidator validator, int n)
+        public new IEnumerable<Board> Generate(IBoardValidator validator, int n)
         {
             _validator = validator;
             
@@ -18,7 +18,7 @@ namespace SpyLib
 
             Perms(ref currentPermutation, elementsAvailable, 0);
 
-            yield return currentPermutation;
+            yield return new Board(currentPermutation, n);
         }
     }
     
@@ -46,5 +46,5 @@ namespace SpyLib
                 list[n] = value;
             }
         }
-    }
+    }*/
 }
