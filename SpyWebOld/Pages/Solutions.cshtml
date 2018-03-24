@@ -4,20 +4,20 @@
 <h2>Solutions found</h2>
 <table>
     <thead>
-    <tr>
-        <th>N</th>
-        <th>Solution</th>
-        <th>Render</th>
-    </tr>
+        <tr>
+            <th>N</th>
+            <th>Solution</th>
+            <th>Render</th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var solution in Model.Solutions)
-    {
-        <tr>
-            <td>@solution.n</td>
-            <td>@solution.solution</td>
-            <td><a href="">Render</a></td>
-        </tr>
-    }
+        @foreach (var solution in Model.Solutions)
+        {
+            <tr>
+                <td>@solution.n</td>
+                <td>@solution.solution</td>
+                <td><a href="">Render</a></td>
+            </tr>
+        }
     </tbody>
 </table>

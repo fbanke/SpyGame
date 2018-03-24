@@ -74,7 +74,6 @@ namespace SpyLib
             for (var x2 = 1; x2 < board.n; x2++)
             {
                 var y2 = board.board[x2 - 1];
-                //Console.WriteLine("A: "+y2);
                 // solve equation for line between the two points
                 var a = (double) (y - y2) / (x - x2);
                 var b = y - a * x;

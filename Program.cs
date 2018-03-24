@@ -6,15 +6,17 @@ namespace SpyGame
     {
         public static void Main(string[] args)
         {
-            var generator = new AllBoardGenerator();
-            var validator = new BruteForceValidator();
+            //var generator = new AllBoardGenerator();
+            //var validator = new BruteForceValidator();
 
             //var generator = new SmartBoardGenerator();
             //var validator = new SmartValidator();
 
             //var generator = new RandomSmartBoardGenerator();
             //var validator = new CachingValidator();
-            var tester = new BoardTester(21, 25, generator, validator);
+            var generator = new AllBoardGenerator();
+            var validator = new BruteForceValidator();
+            var tester = new BoardTester(9, 25, generator, validator);
             tester.Run();
         }
     }

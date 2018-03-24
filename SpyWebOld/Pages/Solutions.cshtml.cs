@@ -1,29 +1,26 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.WindowsAzure.Storage.Queue;
 
 namespace SpyWeb.Pages
 {
     public class SolutionsModel : PageModel
     {
-        public IEnumerable<Solution> Solutions { get; private set; }
+        public List<Solution> Solutions { get; private set; } = new List<Solution>();
 
-        public void OnGetAsync() 
+        public void OnGet()
         {
-            Solutions = new List<Solution>();
-            var solution = new Solution();
-            solution.n = 11;
-            solution.solution = "1 2 3 4 5";
-            Solutions.Append(solution);
-        }
-        /*
-        public IEnumerable<CloudQueueMessage> Messages { get; private set; }
-        public string Message { get; private set; } = "Message from backend";
+            var messages = Program.SpyQueue.PeekMessagesAsync(10).GetAwaiter().GetResult();
 
-        public async Task OnGetAsync() // initializer, only runs once
-        {
-            Messages = await Startup.SpyQueue.PeekMessagesAsync(10);
+            foreach (var message in messages)
+            {
+                var solution = new Solution();
+                solution.n = 11;
+                solution.solution = message.AsString;
+                Solutions.Add(solution);
+            }
         }
-        */
     }
 }

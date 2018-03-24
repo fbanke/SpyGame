@@ -11,13 +11,17 @@ namespace SpyWeb.Pages
         public async Task<IActionResult> OnPost()
         {
             var n = Int32.Parse(Request.Form["n"]);
-            string[] lines = { Request.Form["validator"], Request.Form["generator"] };
-            System.IO.File.WriteAllLines(n+".txt", lines);
-
-            /*string message = Request.Form["queue-message"];
+            string message = n.ToString();
             
             var msg = new CloudQueueMessage(message);
-            await Startup.SpyQueue.AddMessageAsync(msg);*/
+            await Program.SpyQueue.AddMessageAsync(msg);
+
+            var messages = await Program.SpyQueue.PeekMessagesAsync(10);
+            foreach(var nn in messages)
+            {
+                Console.WriteLine(nn.AsString);
+            }
+
 
             return RedirectToPage("/Solutions");
         }
