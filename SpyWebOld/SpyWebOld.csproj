@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0-preview1-final" />
+    <PackageReference Include="Microsoft.Azure.CosmosDB.Table" Version="1.1.0" />
     <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="3.2.3" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.1.0" />
   </ItemGroup>

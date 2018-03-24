@@ -13,14 +13,12 @@ namespace SpyWeb.Pages
             var n = Int32.Parse(Request.Form["n"]);
             string message = n.ToString();
             
-            var msg = new CloudQueueMessage(message);
+            var msg = new CloudQueueMessage("{message:'"+message+"'}");
             await Program.SpyQueue.AddMessageAsync(msg);
 
-            var messages = await Program.SpyQueue.PeekMessagesAsync(10);
-            foreach(var nn in messages)
-            {
-                Console.WriteLine(nn.AsString);
-            }
+            var solution = new Solution(9, "abv");
+
+            await Program.InsertOrMergeEntityAsync(solution);
 
 
             return RedirectToPage("/Solutions");

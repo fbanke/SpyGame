@@ -18,8 +18,13 @@ namespace SpyWeb.Pages
             {
                 var solution = new Solution();
                 solution.n = 11;
-                solution.solution = message.AsString;
+                solution.solution = message.AsString+" From QUEUE";
                 Solutions.Add(solution);
+            }
+
+            foreach( var sol in Program.GetAllSolutions())
+            {
+                Solutions.Add(sol);
             }
         }
     }
