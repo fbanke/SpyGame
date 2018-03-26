@@ -59,12 +59,6 @@ namespace SpyWeb
                 .UseStartup<Startup>()
                 .Build();
         
-        public static string GetEnvironmentVariable(string name)
-        {
-            return name + ": " + 
-                   System.Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Process);
-        }
-
         /// <summary>
         /// The Table Service supports two main types of insert operations.
         ///  1. Insert - insert a new entity. If an entity already exists with the same PK + RK an exception will be thrown.
@@ -95,7 +89,6 @@ namespace SpyWeb
             catch (StorageException e)
             {
                 Console.WriteLine(e.Message);
-                Console.ReadLine();
                 throw;
             }
         }

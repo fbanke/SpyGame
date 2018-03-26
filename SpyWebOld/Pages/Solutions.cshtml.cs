@@ -12,20 +12,7 @@ namespace SpyWeb.Pages
 
         public void OnGet()
         {
-            var messages = Program.SpyQueue.PeekMessagesAsync(10).GetAwaiter().GetResult();
-
-            foreach (var message in messages)
-            {
-                var solution = new Solution();
-                solution.n = 11;
-                solution.solution = message.AsString+" From QUEUE";
-                Solutions.Add(solution);
-            }
-
-            foreach( var sol in Program.GetAllSolutions())
-            {
-                Solutions.Add(sol);
-            }
+            Solutions = Program.GetAllSolutions();
         }
     }
 }

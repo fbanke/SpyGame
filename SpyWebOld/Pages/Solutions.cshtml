@@ -6,6 +6,9 @@
     <thead>
         <tr>
             <th>N</th>
+            <th>Generator</th>
+            <th>Validator</th>
+            <th>Time Requested</th>
             <th>Solution</th>
             <th>Render</th>
         </tr>
@@ -13,11 +16,14 @@
     <tbody>
         @foreach (var solution in Model.Solutions)
         {
-            <tr>
-                <td>@solution.n</td>
-                <td>@solution.solution</td>
-                <td><a href="">Render</a></td>
-            </tr>
+        <tr>
+            <td>@solution.N</td>
+            <td>@solution.Generator</td>
+            <td>@solution.Validator</td>
+            <td>@solution.TimeRequested</td>
+            <td>@solution.BoardSolution</td>
+            <td><a href="">Render</a></td>
+        </tr>
         }
     </tbody>
 </table>

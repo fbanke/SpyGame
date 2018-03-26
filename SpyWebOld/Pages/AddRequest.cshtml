@@ -6,31 +6,35 @@
 <form method="POST">
 <table>
     <tbody>
-    <tr>
-        <td>n</td>
-        <td><input type="text" name="n" /></td>
-    </tr>
-    <tr>
-        <td>Validator</td>
-        <td>
-            <select name="validator">
-                <option>Bruteforce</option>
-                <option>Smart</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>Generator</td>
-        <td>
-            <select name="Generator">
-                <option>Bruteforce</option>
-                <option>Smart</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2"><input type="submit" /></td>
-    </tr>
+        <tr>
+            <td>n</td>
+            <td><input type="text" name="N" /></td>
+        </tr>
+        <tr>
+            <td>Validator</td>
+            <td>
+                <select name="Validator">
+                    @foreach (var validator in Model.Validators)
+                    {
+                        <option>@validator.ToString()</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Generator</td>
+            <td>
+                <select name="Generator">
+                    @foreach (var generator in Model.Generators)
+                    {
+                        <option>@generator.ToString()</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" /></td>
+        </tr>
     </tbody>
 </table>    
 </form>

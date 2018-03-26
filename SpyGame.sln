@@ -15,8 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpyWebOld", "SpyWebOld\SpyWebOld.csproj", "{88AA9307-AD32-4C8F-82FA-61B690C7951C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4} = {23EEB83A-E14D-4BED-9B48-8BDD3E7C4CC4}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpyFunction", "SpyFunction\SpyFunction\SpyFunction.csproj", "{6EDCCDDD-1A27-4A47-9D6F-4D37BC734D7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpyFunction", "SpyFunction\SpyFunction\SpyFunction.csproj", "{6EDCCDDD-1A27-4A47-9D6F-4D37BC734D7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

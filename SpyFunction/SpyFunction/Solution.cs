@@ -1,7 +1,7 @@
 ﻿using Microsoft.WindowsAzure.Storage.Table;
 using System;
 
-namespace SpyWeb
+namespace SpyFunction
 {
     public class Solution : TableEntity
     {
